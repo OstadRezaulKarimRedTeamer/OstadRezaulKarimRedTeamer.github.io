@@ -209,6 +209,7 @@ function initTerminal() {
   <span class="term-cmd">skills</span>       - List of core proficiencies & capabilities
   <span class="term-cmd">arsenal</span>      - View offensive weapons & development stack
   <span class="term-cmd">missions</span>     - Recent adversary simulations & case studies
+  <span class="term-cmd">curriculum</span>   - Ostad Red Team Forge 19-Module Masterclass
   <span class="term-cmd">domain</span>       - Custom domain details (ostadrezaulkarim.com)
   <span class="term-cmd">github</span>       - GitHub profile repository link
   <span class="term-cmd">contact</span>      - Secure communication channels
@@ -272,6 +273,21 @@ function initTerminal() {
 2. [OP-SILENT-ECHO] Next-Gen EDR Bypass & Custom Syscall Injection (Successful)
 3. [OP-SECURE-FORGE] Zero-Trust Enterprise Portal Hardening (Verified)
 `, 'term-warn');
+        break;
+
+      case 'curriculum':
+      case 'masterclass':
+        appendLine(`
+[+] RED TEAM MASTERCLASS // OSTAD RED TEAM FORGE (2026 EDITION)
+[+] SYLLABUS: 19 Advanced Modules (Zero to Enterprise Operator)
+    - Modules 1-3: Foundations, C Shellcode Runners, EDR/AMSI Bypasses
+    - Modules 4-6: Active Directory, Kerberoasting, Golden Tickets, DCSync
+    - Modules 7-9: Havoc C2, Azure Entra ID Cloud Takeover, Reporting
+    - Modules 10-12: Physical Locks, Social Engineering, Custom Malware (Hell's Gate)
+    - Modules 13-19: Web, Android, WiFi, Exploit Dev (ROP), IoT, OSINT, K8s
+[+] VIEW PAGE: <a href="curriculum.html" style="color:#00b0ff; text-decoration:underline;">curriculum.html</a>
+[+] DOWNLOAD DOCX: <a href="assets/Ostad_Red_Team_Forge_Masterclass_Curriculum.docx" download style="color:#00ff88; text-decoration:underline;">Ostad_Red_Team_Forge_Masterclass_Curriculum.docx</a>
+`, 'term-success');
         break;
 
       case 'domain':
