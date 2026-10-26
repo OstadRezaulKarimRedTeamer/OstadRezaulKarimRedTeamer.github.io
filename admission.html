@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Admission | Ostad Rezaul Karim</title>
+  <meta name="description" content="Student admission form for Ostad Red Team Forge and cybersecurity training programs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --bg-primary: #060709;
+      --bg-secondary: #0d0e14;
+      --bg-card: rgba(15, 17, 24, 0.85);
+      --bg-card-hover: rgba(26, 28, 40, 0.95);
+      --accent-red: #ff1744;
+      --accent-crimson: #d50000;
+      --accent-bright: #ff3366;
+      --accent-glow: rgba(255, 23, 68, 0.45);
+      --accent-glow-subtle: rgba(255, 23, 68, 0.15);
+      --text-main: #f3f6fa;
+      --text-muted: #95a3b8;
+      --text-dim: #5e6d82;
+      --border-light: rgba(255, 23, 68, 0.2);
+      --border-active: rgba(255, 23, 68, 0.65);
+      --font-cyber: 'Orbitron', sans-serif;
+      --font-sub: 'Rajdhani', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-body);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, rgba(255, 23, 68, 0.12), transparent 32%),
+        linear-gradient(180deg, #05070c 0%, #090b12 40%, #060709 100%);
+      color: var(--text-main);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 36px auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border: 1px solid var(--border-light);
+      background: rgba(12, 14, 21, 0.85);
+      border-radius: 12px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 18px rgba(255, 23, 68, 0.12);
+      margin-bottom: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 23, 68, 0.10);
+      border: 1px solid var(--border-light);
+      color: var(--accent-bright);
+      font-size: 1.1rem;
+      box-shadow: 0 0 14px rgba(255, 23, 68, 0.25);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-family: var(--font-cyber);
+      font-size: 0.92rem;
+      letter-spacing: 1.2px;
+      color: var(--text-main);
+    }
+
+    .brand-sub {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: var(--accent-bright);
+      text-transform: uppercase;
+    }
+
+    .topbar-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .topbar-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-family: var(--font-sub);
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: 0.2s ease;
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+
+    .topbar-links a:hover {
+      color: var(--text-main);
+      background: var(--accent-glow-subtle);
+      border: 1px solid var(--border-light);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 30px;
+    }
+
+    .hero-card,
+    .form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: 18px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(19, 22, 31, 0.9), rgba(11, 12, 18, 0.9));
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      max-width: fit-content;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 23, 68, 0.10);
+      border: 1px solid var(--border-light);
+      color: var(--accent-bright);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      margin: 0 0 14px;
+      font-family: var(--font-cyber);
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.08;
+      letter-spacing: 1px;
+    }
+
+    .hero-title .glow {
+      color: var(--accent-bright);
+      text-shadow: 0 0 14px rgba(255, 23, 68, 0.45);
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 1.04rem;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .mini-stat {
+      padding: 16px 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-family: var(--font-cyber);
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .mini-stat span {
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+
+    .banner-visual {
+      position: relative;
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: radial-gradient(circle at center, rgba(255, 23, 68, 0.15), rgba(0,0,0,0) 52%);
+    }
+
+    .badge-shell {
+      position: relative;
+      width: min(100%, 420px);
+      aspect-ratio: 1 / 1.06;
+      background: rgba(13, 15, 21, 0.9);
+      border: 1px solid var(--border-light);
+      border-radius: 18px;
+      box-shadow: 0 0 30px rgba(255, 23, 68, 0.18), inset 0 0 25px rgba(255, 23, 68, 0.1);
+      overflow: hidden;
+    }
+
+    .badge-shell::before,
+    .badge-shell::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+    }
+
+    .badge-shell::after {
+      inset: 38px;
+      border-color: rgba(255, 23, 68, 0.28);
+    }
+
+    .badge-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.1) contrast(1.05);
+    }
+
+    .badge-tag {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      background: rgba(7, 8, 12, 0.86);
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .badge-tag strong {
+      color: var(--accent-bright);
+    }
+
+    .form-card {
+      padding: 26px;
+      background: rgba(10, 12, 18, 0.88);
+    }
+
+    .form-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 18px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .form-header h2 {
+      margin: 0;
+      font-family: var(--font-cyber);
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      letter-spacing: 1px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 23, 68, 0.10);
+      border: 1px solid var(--border-light);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent-bright);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .status-pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 12px rgba(52,211,153,0.9);
+      display: inline-block;
+    }
+
+    form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    input, select, textarea, button {
+      font: inherit;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      color: var(--text-main);
+      outline: none;
+      transition: 0.2s ease;
+      resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(149, 163, 184, 0.7);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--border-active);
+      box-shadow: 0 0 0 3px rgba(255, 23, 68, 0.12);
+      background: rgba(255,255,255,0.025);
+    }
+
+    textarea {
+      min-height: 120px;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .info-note {
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      line-height: 1.6;
+      max-width: 420px;
+    }
+
+    .submit-btn {
+      border: none;
+      cursor: pointer;
+      padding: 14px 22px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-red), var(--accent-crimson));
+      color: #fff;
+      font-family: var(--font-sub);
+      font-size: 0.96rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 0 20px rgba(255, 23, 68, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 24px rgba(255, 23, 68, 0.42);
+    }
+
+    .success-box {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(52, 211, 153, 0.5);
+      background: rgba(16, 185, 129, 0.08);
+      color: #d1fae5;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      line-height: 1.6;
+    }
+
+    .success-box.visible {
+      display: block;
+    }
+
+    .foot-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border-light);
+      background: rgba(15, 17, 24, 0.75);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .foot-banner strong {
+      color: var(--accent-bright);
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .field-row { grid-template-columns: 1fr; }
+      .topbar { flex-direction: column; align-items: flex-start; gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Go to homepage">
+        <span class="brand-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <span class="brand-text">
+          <span class="brand-title">OSTAD REZAUL KARIM</span>
+          <span class="brand-sub">Red Team Forge</span>
+        </span>
+      </a>
+
+      <nav class="topbar-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="curriculum.html">Curriculum</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-label="Admission overview">
+        <div class="hero-card">
+          <div class="hero-badge"><i class="fa-solid fa-user-plus"></i> Student Admission Portal</div>
+          <h1 class="hero-title">Apply for <span class="glow">Admission</span></h1>
+          <p class="hero-sub">
+            Join the next generation of cybersecurity specialists, ethical hackers, and secure software builders.
+            Fill out the form and our admissions team will contact you with the next steps.
+          </p>
+
+          <div class="info-grid">
+            <div class="mini-stat">
+              <strong>19</strong>
+              <span>Modules</span>
+            </div>
+            <div class="mini-stat">
+              <strong>100%</strong>
+              <span>Practical</span>
+            </div>
+            <div class="mini-stat">
+              <strong>24/7</strong>
+              <span>Support</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="banner-visual" aria-label="Admission visual card">
+          <div class="badge-shell">
+            <img class="badge-img" src="assets/ostad_badge.jpg" alt="Ostad Red Team Forge badge" />
+            <div class="badge-tag">
+              <span>Verified Portal</span>
+              <strong>ADMIT-2026</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-card" aria-labelledby="admission-form-title">
+        <div class="form-header">
+          <h2 id="admission-form-title">Student Admission Form</h2>
+          <span class="status-pill">Open for Enrollment</span>
+        </div>
+
+        <form id="admission-form" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="student-name">Student Full Name</label>
+              <input id="student-name" name="student-name" type="text" placeholder="Enter student full name" required />
+            </div>
+
+            <div class="field">
+              <label for="student-email">Email Address</label>
+              <input id="student-email" name="student-email" type="email" placeholder="student@example.com" required />
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="phone" type="tel" placeholder="01XXXXXXXXX" required />
+            </div>
+
+            <div class="field">
+              <label for="dob">Date of Birth</label>
+              <input id="dob" name="dob" type="date" required />
+            </div>
+
+            <div class="field">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="program">Program / Course</label>
+              <select id="program" name="program" required>
+                <option value="">Select program</option>
+                <option value="cybersecurity">Cybersecurity & Red Team</option>
+                <option value="web-security">Web Security & Pentesting</option>
+                <option value="app-development">Full-Stack Web Development</option>
+                <option value="ethical-hacking">Ethical Hacking Fundamentals</option>
+                <option value="masterclass">Red Team Masterclass</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="education">Current Education / Qualification</label>
+              <input id="education" name="education" type="text" placeholder="e.g. HSC / Diploma / University" required />
+            </div>
+
+            <div class="field">
+              <label for="institution">School / College / Institution</label>
+              <input id="institution" name="institution" type="text" placeholder="Institution name" required />
+            </div>
+
+            <div class="field full">
+              <label for="address">Address</label>
+              <textarea id="address" name="address" placeholder="Enter your present address" required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="guardian-name">Guardian Name</label>
+              <input id="guardian-name" name="guardian-name" type="text" placeholder="Guardian full name" required />
+            </div>
+
+            <div class="field">
+              <label for="guardian-phone">Guardian Phone</label>
+              <input id="guardian-phone" name="guardian-phone" type="tel" placeholder="Guardian contact number" required />
+            </div>
+
+            <div class="field full">
+              <label for="motivation">Why do you want to join this program?</label>
+              <textarea id="motivation" name="motivation" placeholder="Tell us about your learning goals and motivation..." required></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <div class="info-note">
+              By submitting this form, you agree to be contacted by the admissions team regarding enrollment,
+              payment details, and course onboarding.
+            </div>
+            <button class="submit-btn" type="submit">Submit Admission</button>
+          </div>
+
+          <div id="success-message" class="success-box" aria-live="polite">
+            Your admission request has been received successfully. Our team will contact you soon with the next steps.
+          </div>
+        </form>
+      </section>
+
+      <div class="foot-banner">
+        <span><strong>Admission Hotline:</strong> admissions@ostadrezaulkarim.com</span>
+        <span><strong>Office:</strong> Ostad Red Team Forge</span>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('admission-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+      const successBox = document.getElementById('success-message');
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      successBox.classList.add('visible');
+      form.reset();
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
